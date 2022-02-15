@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lemonImage = findViewById(R.id.imageView2)
+        lemonImage = findViewById(R.id.lemonImage)
         scoreText = findViewById(R.id.scoreText)
         moneyString = resources.getString(R.string.money)
 
