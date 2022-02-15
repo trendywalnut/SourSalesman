@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sour Salesmen</string>
+    <string name="money">$ </string>
 </resources>
