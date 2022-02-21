@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateView() {
-        moneyString = "$$clickCount"
+        val scoreText: TextView = findViewById(R.id.scoreText)
+        moneyString = "$ $clickCount"
+
+        scoreText.text = moneyString
     }
 }
