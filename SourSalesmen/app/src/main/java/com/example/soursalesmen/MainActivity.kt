@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         val money : String = "$ $clickCount"
         val duration = Toast.LENGTH_SHORT
 
-        val text : String = "Total money made: " + money
+        val text : String = "Total money made: " + money + "\nIdle Click: " + idleLemons + "\nClick Multiplier: " + clickMultiplied + "\nValue Multiplier: " + valueMultiplied
 
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
