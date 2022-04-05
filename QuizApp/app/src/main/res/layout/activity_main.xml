@@ -19,14 +19,15 @@
         />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="48dp"
-        android:text="Quizrdle"
         android:layout_marginBottom="30dp"
+        android:text="Quizrdle"
+        android:textSize="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/questionButton"
@@ -40,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
     <Button
+        android:id="@+id/statsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -48,5 +50,48 @@
         android:text="stats"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <RelativeLayout
+        android:id="@+id/statsLayout"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ExtraText">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:srcCompat="@android:drawable/title_bar" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="69dp"
+            android:layout_marginEnd="59dp"
+            android:text="User Stats"
+            android:textAlignment="center"
+
+            android:textSize="34sp"
+            android:translationY="30dp" />
+
+        <ImageButton
+            android:id="@+id/closeStatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationY="18dp"
+            app:srcCompat="@android:drawable/btn_dialog" />
+
+
+    </RelativeLayout>
+
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
