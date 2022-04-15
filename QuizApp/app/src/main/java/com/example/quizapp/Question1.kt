@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class Question1 : AppCompatActivity() {
@@ -60,14 +61,22 @@ class Question1 : AppCompatActivity() {
 
 
         title = "Question 1"
+        val correctText = "Correct!"
+        val incorrectText = "Wrong :("
+        val duration = Toast.LENGTH_SHORT
         val nextButton: Button = findViewById(R.id.next_button)
         nextButton.setOnClickListener {
             registerPause = false
             Log.d("selected: ", selectedAnswer.toString())
             Log.d("indices: ", correctIndices?.get(questionNumber).toString())
             if (selectedAnswer == correctIndices?.get(questionNumber)) {
+                val toast = Toast.makeText(applicationContext, correctText, duration)
+                toast.show()
                 Log.d("wow: ", "selected correct")
                 correctArray?.set(questionNumber, true)
+            }else{
+                val toast = Toast.makeText(applicationContext, incorrectText, duration)
+                toast.show()
             }
             Log.d("level: ", questionNumber.toString())
             for (i in 0..4) {
