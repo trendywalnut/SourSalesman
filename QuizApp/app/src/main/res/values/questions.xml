@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="question_texts">
+        <item>Who painted the Mona Lisa?</item>
+        <item>Which jazz musician was known for playing a bent trumpet?</item>
+        <item>In what video game did Mario make his first appearance?</item>
+        <item>Which of the following inventions was the first to be patented?</item>
+        <item>In what type of matter are atoms most tightly packed?</item>
+    </string-array>
+
+    <string-array name="question_subjects">
+        <item>Art</item>
+        <item>Music</item>
+        <item>Media</item>
+        <item>History</item>
+        <item>Science</item>
+    </string-array>
+
+    <string-array name="question_emojis">
+        <item>🎨</item>
+        <item>🎵</item>
+        <item>📺</item>
+        <item>🕰️</item>
+        <item>🔬</item>
+    </string-array>
+
+    <string-array name="question_answers">
+        <item>Leonardo Da Vinci</item>
+        <item>Michelangelo</item>
+        <item>Raffaello Sanzo da Urbino</item>
+        <item>Donato di Niccolò di Betto Bardi</item>
+
+        <item>Chet Baker</item>
+        <item>Miles Davis</item>
+        <item>Dizzy Gillespie</item>
+        <item>Louis Armstrong</item>
+
+        <item>Super Mario Bros.</item>
+        <item>Mario Bros.</item>
+        <item>Yoshi’s Island</item>
+        <item>Donkey Kong</item>
+
+        <item>Cash Register</item>
+        <item>Rubber Band</item>
+        <item>Chewing Gum</item>
+        <item>Dishwasher</item>
+
+        <item>Solids</item>
+        <item>Liquids</item>
+        <item>Gasses</item>
+        <item>All are the same</item>
+    </string-array>
+
+    <integer-array name="correct_indices">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+        <item>0</item>
+    </integer-array>
+
+</resources>

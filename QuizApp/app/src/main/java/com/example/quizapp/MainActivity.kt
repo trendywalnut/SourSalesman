@@ -26,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         val button:Button = findViewById(R.id.questionButton)
         button.setOnClickListener{
             val intent = Intent(this@MainActivity, Question1::class.java)
+            intent.putExtra("questionNumber", 0)
+            intent.putExtra("questionTexts", resources.getStringArray(R.array.question_texts))
+            intent.putExtra("questionSubjects", resources.getStringArray(R.array.question_subjects))
+            intent.putExtra("questionEmojis", resources.getStringArray(R.array.question_emojis))
+            intent.putExtra("questionAnswers", resources.getStringArray(R.array.question_answers))
+            intent.putExtra("correctIndices", resources.getIntArray(R.array.correct_indices))
+            intent.putExtra("correctArray", booleanArrayOf(false, false, false, false, false))
+
             startActivity(intent)
         }
 
@@ -38,6 +46,4 @@ class MainActivity : AppCompatActivity() {
             statsLayout.setVisibility(View.GONE)
         }
     }
-
-
 }
