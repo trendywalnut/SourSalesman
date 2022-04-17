@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         statsLayout.setVisibility(View.GONE)
 
         val button:Button = findViewById(R.id.questionButton)
+        var dailyAnswered = false
         button.setOnClickListener{
             val intent = Intent(this@MainActivity, Question1::class.java)
             quiz = readQuizXml()
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val client = OkHttpClient()
 
         val request = Request.Builder()
-            .url("https://quizapp-e4fd3-default-rtdb.firebaseio.com/daily.json")
+            .url("https://quizapp-e4fd3-default-rtdb.firebaseio.com/.json")
             .build()
 
 
