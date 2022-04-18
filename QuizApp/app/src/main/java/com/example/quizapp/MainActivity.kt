@@ -45,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         statsLayout.setVisibility(View.GONE)
 
         //figure this out
-        @Override
-        public void onBackPressed() {
+        //@Override
+        //public void onBackPressed() {
             // Do Here what ever you want do on back press;
-        }
+        //}
 
         val button:Button = findViewById(R.id.questionButton)
         var dailyAnswered = false
