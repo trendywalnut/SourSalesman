@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         //val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
         statsLayout.setVisibility(View.GONE)
 
+        //figure this out
         @Override
         public void onBackPressed() {
             // Do Here what ever you want do on back press;
