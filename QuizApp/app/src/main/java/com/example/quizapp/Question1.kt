@@ -1,10 +1,15 @@
 package com.example.quizapp
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
@@ -41,26 +46,40 @@ class Question1 : AppCompatActivity() {
         val answer3Button: Button = findViewById(R.id.answer3)
         val answer4Button: Button = findViewById(R.id.answer4)
 
+        //value for performing animations on buttons
+        var buttonPressed: Button;
+
         answer1Button.setText(questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
         answer1Button.setOnClickListener {
             selectedAnswer = 0
+
+            buttonPressed = answer1Button;
+            scaler(buttonPressed);
         }
 
         answer2Button.setText(questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
         answer2Button.setOnClickListener {
             selectedAnswer = 1
+
+            buttonPressed = answer2Button;
+            scaler(buttonPressed);
         }
 
         answer3Button.setText(questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
         answer3Button.setOnClickListener {
             selectedAnswer = 2
+
+            buttonPressed = answer3Button;
+            scaler(buttonPressed);
         }
 
         answer4Button.setText(questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
         answer4Button.setOnClickListener {
             selectedAnswer = 3
-        }
 
+            buttonPressed = answer4Button;
+            scaler(buttonPressed);
+        }
 
         title = "Question 1"
         val correctText = "Correct!"
@@ -110,5 +129,26 @@ class Question1 : AppCompatActivity() {
             paused = true
             Log.d("pause", "paused")
         }
+    }
+
+    private fun ObjectAnimator.disableViewDuringAnimation(view: View){
+        addListener(object : AnimatorListenerAdapter(){
+            override fun onAnimationStart(animation: Animator?){
+                view.isEnabled = false
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                view.isEnabled = true;
+            }
+        })
+
+    }
+
+    private fun scaler(button: Button){
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.7f);
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.7f);
+        val animator = ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY);
+
+        animator.disableViewDuringAnimation(button);
+        animator.start();
     }
 }
