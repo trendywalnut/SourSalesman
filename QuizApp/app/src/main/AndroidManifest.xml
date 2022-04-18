@@ -17,24 +17,9 @@
             android:label="@string/title_activity_question1"
             android:theme="@style/Theme.QuizApp.NoActionBar" />
         <activity
-            android:name=".Question2"
+            android:name=".ResultsScreen"
             android:exported="false"
             android:label="Question2"
-            android:theme="@style/Theme.QuizApp.NoActionBar" />
-        <activity
-            android:name=".Question3"
-            android:exported="false"
-            android:label="Question3"
-            android:theme="@style/Theme.QuizApp.NoActionBar" />
-        <activity
-            android:name=".Question4"
-            android:exported="false"
-            android:label="Question4"
-            android:theme="@style/Theme.QuizApp.NoActionBar" />
-        <activity
-            android:name=".Question5"
-            android:exported="false"
-            android:label="Question5"
             android:theme="@style/Theme.QuizApp.NoActionBar" />
         <activity
             android:name=".MainActivity"

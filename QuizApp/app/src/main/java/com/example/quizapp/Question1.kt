@@ -26,8 +26,6 @@ class Question1 : AppCompatActivity() {
         val questionAnswers = thisIntent.getStringArrayExtra("questionAnswers")
         val correctIndices = thisIntent.getIntArrayExtra("correctIndices")
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
-        val sp = getSharedPreferences(questionNumber.toString() + " Answers", Context.MODE_PRIVATE)
-        val editor = sp.edit()
 
         val questionNumberView: TextView = findViewById(R.id.question_number)
         questionNumberView.setText("Q" + (questionNumber + 1).toString())
@@ -46,29 +44,21 @@ class Question1 : AppCompatActivity() {
         answer1Button.setText(questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
         answer1Button.setOnClickListener {
             selectedAnswer = 0
-            editor.putString(questionSubjects?.get(questionNumber).orEmpty(),questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
-            editor.commit()
         }
 
         answer2Button.setText(questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
         answer2Button.setOnClickListener {
             selectedAnswer = 1
-            editor.putString(questionSubjects?.get(questionNumber).orEmpty(),questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
-            editor.commit()
         }
 
         answer3Button.setText(questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
         answer3Button.setOnClickListener {
             selectedAnswer = 2
-            editor.putString(questionSubjects?.get(questionNumber).orEmpty(),questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
-            editor.commit()
         }
 
         answer4Button.setText(questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
         answer4Button.setOnClickListener {
             selectedAnswer = 3
-            editor.putString(questionSubjects?.get(questionNumber).orEmpty(),questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
-            editor.commit()
         }
 
 
@@ -78,17 +68,16 @@ class Question1 : AppCompatActivity() {
         val duration = Toast.LENGTH_SHORT
         val nextButton: Button = findViewById(R.id.next_button)
         nextButton.setOnClickListener {
-            val answer = sp.getString(questionSubjects?.get(questionNumber).orEmpty(), "")
             registerPause = false
             Log.d("selected: ", selectedAnswer.toString())
             Log.d("indices: ", correctIndices?.get(questionNumber).toString())
             if (selectedAnswer == correctIndices?.get(questionNumber)) {
-                val toast = Toast.makeText(applicationContext, answer, duration)
+                val toast = Toast.makeText(applicationContext, correctText, duration)
                 toast.show()
                 Log.d("wow: ", "selected correct")
                 correctArray?.set(questionNumber, true)
             }else{
-                val toast = Toast.makeText(applicationContext, answer, duration)
+                val toast = Toast.makeText(applicationContext, incorrectText, duration)
                 toast.show()
             }
             Log.d("level: ", questionNumber.toString())
@@ -96,7 +85,7 @@ class Question1 : AppCompatActivity() {
                 Log.d("correct: ", correctArray?.get(i).toString())
             }
             if (questionNumber == 4) {
-                val i = Intent(this@Question1, MainActivity::class.java)
+                val i = Intent(this@Question1, ResultsScreen::class.java)
                 i.putExtra("correctArray", correctArray)
                 startActivity(i)
             } else {

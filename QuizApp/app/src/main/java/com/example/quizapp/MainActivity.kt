@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val thisIntent = intent
+        val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
+
         title = "Quizdle"
         var quiz = readQuizXml()
         if(quiz.date == ""){
@@ -41,40 +44,56 @@ class MainActivity : AppCompatActivity() {
         //val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
         statsLayout.setVisibility(View.GONE)
 
+        @Override
+        public void onBackPressed() {
+            // Do Here what ever you want do on back press;
+        }
+
         val button:Button = findViewById(R.id.questionButton)
         var dailyAnswered = false
-        button.setOnClickListener{
-            val intent = Intent(this@MainActivity, Question1::class.java)
-            quiz = readQuizXml()
-
-            var questionTexts = arrayListOf<String>()
-            var questionSubjects = arrayListOf<String>()
-            var questionEmojis = arrayListOf<String>()
-            var questionAnswers = arrayListOf<String>()
-            var questionCorrectIndices = arrayListOf<Int>()
-            for(question in quiz.questions){
-                Log.d("here", question.text)
-                Log.d("here", question.subject)
-                Log.d("here", question.emoji)
-                questionTexts.add(question.text)
-                questionSubjects.add(question.subject)
-                questionEmojis.add(question.emoji)
-                questionCorrectIndices.add((question.correctIndex))
-                for(answer in question.answers){
-                    questionAnswers.add(answer)
-                }
+        if(correctArray != null){
+            button.setOnClickListener {
+                val intent = Intent(this@MainActivity, ResultsScreen::class.java)
+                intent.putExtra("correctArray", correctArray)
+                startActivity(intent)
             }
-            //if stored xml == server date
-            intent.putExtra("questionNumber", 0)
-            intent.putExtra("questionTexts", questionTexts.toTypedArray())
-            intent.putExtra("questionSubjects", questionSubjects.toTypedArray())
-            intent.putExtra("questionEmojis", questionEmojis.toTypedArray())
-            intent.putExtra("questionAnswers", questionAnswers.toTypedArray())
-            intent.putExtra("correctIndices", questionCorrectIndices.toIntArray())
-            intent.putExtra("correctArray", booleanArrayOf(false, false, false, false, false))
 
-            startActivity(intent)
+        }else{
+            button.setOnClickListener{
+                val intent = Intent(this@MainActivity, Question1::class.java)
+
+                quiz = readQuizXml()
+
+                var questionTexts = arrayListOf<String>()
+                var questionSubjects = arrayListOf<String>()
+                var questionEmojis = arrayListOf<String>()
+                var questionAnswers = arrayListOf<String>()
+                var questionCorrectIndices = arrayListOf<Int>()
+                for(question in quiz.questions){
+                    Log.d("here", question.text)
+                    Log.d("here", question.subject)
+                    Log.d("here", question.emoji)
+                    questionTexts.add(question.text)
+                    questionSubjects.add(question.subject)
+                    questionEmojis.add(question.emoji)
+                    questionCorrectIndices.add((question.correctIndex))
+                    for(answer in question.answers){
+                        questionAnswers.add(answer)
+                    }
+                }
+                //if stored xml == server date
+                intent.putExtra("questionNumber", 0)
+                intent.putExtra("questionTexts", questionTexts.toTypedArray())
+                intent.putExtra("questionSubjects", questionSubjects.toTypedArray())
+                intent.putExtra("questionEmojis", questionEmojis.toTypedArray())
+                intent.putExtra("questionAnswers", questionAnswers.toTypedArray())
+                intent.putExtra("correctIndices", questionCorrectIndices.toIntArray())
+                intent.putExtra("correctArray", booleanArrayOf(false, false, false, false, false))
+
+                startActivity(intent)
+            }
         }
+
 
         val statButton:Button = findViewById(R.id.statsButton)
         statButton.setOnClickListener{
