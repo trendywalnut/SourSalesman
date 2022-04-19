@@ -47,38 +47,58 @@ class Question1 : AppCompatActivity() {
         val answer4Button: Button = findViewById(R.id.answer4)
 
         //value for performing animations on buttons
-        var buttonPressed: Button;
+        var buttonPressed: Button? = null;
 
         answer1Button.setText(questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
         answer1Button.setOnClickListener {
             selectedAnswer = 0
 
+            //unpress animation for old answer
+            if (buttonPressed != null){
+                descaler(buttonPressed!!);
+            }
+            //press animation for new answer
             buttonPressed = answer1Button;
-            scaler(buttonPressed);
+            scaler(buttonPressed!!);
         }
 
         answer2Button.setText(questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
         answer2Button.setOnClickListener {
             selectedAnswer = 1
 
+            //unpress animation for old answer
+            if (buttonPressed != null){
+                descaler(buttonPressed!!);
+            }
+            //press animation for new answer
             buttonPressed = answer2Button;
-            scaler(buttonPressed);
+            scaler(buttonPressed!!);
         }
 
         answer3Button.setText(questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
         answer3Button.setOnClickListener {
             selectedAnswer = 2
 
+            //unpress animation for old answer
+            if (buttonPressed != null){
+                descaler(buttonPressed!!);
+            }
+            //press animation for new answer
             buttonPressed = answer3Button;
-            scaler(buttonPressed);
+            scaler(buttonPressed!!);
         }
 
         answer4Button.setText(questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
         answer4Button.setOnClickListener {
             selectedAnswer = 3
 
+            //unpress animation for old answer
+            if (buttonPressed != null){
+                descaler(buttonPressed!!);
+            }
+            //press animation for new answer
             buttonPressed = answer4Button;
-            scaler(buttonPressed);
+            scaler(buttonPressed!!);
         }
 
         title = "Question 1"
@@ -144,11 +164,19 @@ class Question1 : AppCompatActivity() {
     }
 
     private fun scaler(button: Button){
-        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.7f);
-        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.7f);
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.9f);
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.9f);
         val animator = ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY);
 
         animator.disableViewDuringAnimation(button);
+        animator.start();
+    }
+
+    private fun descaler(button: Button){
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f);
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f);
+        val animator = ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY);
+
         animator.start();
     }
 }
