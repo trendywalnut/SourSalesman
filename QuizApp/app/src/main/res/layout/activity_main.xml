@@ -18,17 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Quizrdle"
-        android:textSize="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <Button
         android:id="@+id/questionButton"
         android:layout_width="wrap_content"
@@ -145,6 +134,16 @@
 
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="310dp"
+        android:layout_height="106dp"
+        app:layout_constraintBottom_toBottomOf="@+id/welcome"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.676"
+        app:srcCompat="@drawable/logo_2"
+        tools:layout_editor_absoluteX="50dp" />
 
     />
 
