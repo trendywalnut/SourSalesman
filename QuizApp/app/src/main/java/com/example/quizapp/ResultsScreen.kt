@@ -13,6 +13,7 @@ class ResultsScreen : AppCompatActivity() {
 
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
+        val questionEmojis = thisIntent.getStringArrayExtra("questionEmojis")?.copyOf()
 
         title = "Results Screen"
         val question1 = findViewById<TextView>(R.id.question1)
@@ -23,15 +24,22 @@ class ResultsScreen : AppCompatActivity() {
         val textArray = arrayListOf<TextView>(question1,question2,question3,question4,question5)
         val backButton = findViewById<Button>(R.id.homeButton)
 
+        question1.append((questionEmojis!!.get(0)).toString())
+        question2.append((questionEmojis!!.get(1)).toString())
+        question3.append((questionEmojis!!.get(2)).toString())
+        question4.append((questionEmojis!!.get(3)).toString())
+        question5.append((questionEmojis!!.get(4)).toString())
+
 
         textArray.forEach{
-            it.text = "incorrect"
+            it.append("Incorrect")
         }
 
         var num = 0
         correctArray!!.forEach {
             if(it){
-                textArray[num].text = "correct!"
+                textArray[num].text = textArray[num].text.dropLast(9)
+                textArray[num].append("Correct!")
             }
             num++
         }
