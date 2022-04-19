@@ -126,6 +126,8 @@ class Question1 : AppCompatActivity() {
             if (questionNumber == 4) {
                 val i = Intent(this@Question1, ResultsScreen::class.java)
                 i.putExtra("correctArray", correctArray)
+                i.putExtra("questionEmojis", questionEmojis)
+                i.putExtra("questionSubjects", questionSubjects)
                 startActivity(i)
             } else {
                 val i = Intent(this@Question1, Question1::class.java)
