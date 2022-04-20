@@ -38,6 +38,7 @@
         android:fontFamily="@font/neufreit_extrabold"
         android:text="Home"
         android:textSize="32dp"
+        android:backgroundTint="#FF8282"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
