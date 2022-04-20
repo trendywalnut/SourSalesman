@@ -6,39 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Back!"
-        android:textSize="48dp"
-        android:layout_marginTop="240dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <Button
-        android:id="@+id/questionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Answer today's questions"
-        android:textSize="24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome" />
-
     <Button
         android:id="@+id/statsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="284dp"
+        android:fontFamily="@font/neufreit_extrabold"
+        android:backgroundTint="#FF8282"
         android:text="stats"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/statsLayout"
@@ -49,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ExtraText">
+        tools:ignore="ExtraText"
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -65,9 +47,10 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="69dp"
             android:layout_marginEnd="59dp"
+            android:fontFamily="@font/neufreit_extrabold"
             android:text="User Stats"
-            android:textAlignment="center"
 
+            android:textAlignment="center"
             android:textSize="28sp"
             android:translationY="30dp" />
 
@@ -140,10 +123,40 @@
         android:layout_width="310dp"
         android:layout_height="106dp"
         app:layout_constraintBottom_toBottomOf="@+id/welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676"
-        app:srcCompat="@drawable/logo_2"
-        tools:layout_editor_absoluteX="50dp" />
+        app:layout_constraintVertical_bias="0.759"
+        app:srcCompat="@drawable/logo_2" />
+
+    <Button
+        android:id="@+id/questionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FF8282"
+        android:fontFamily="@font/neufreit_extrabold"
+        android:text="Answer today's questions"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome"
+        app:layout_constraintVertical_bias="0.003" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:fontFamily="@font/neufreit_extrabold"
+        android:text="Welcome Back!"
+        android:textSize="48dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     />
 
