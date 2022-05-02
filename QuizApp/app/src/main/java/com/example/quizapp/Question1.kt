@@ -4,13 +4,11 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -55,11 +53,11 @@ class Question1 : AppCompatActivity() {
 
             //unpress animation for old answer
             if (buttonPressed != null){
-                descaler(buttonPressed!!);
+                unpressButton(buttonPressed!!);
             }
             //press animation for new answer
             buttonPressed = answer1Button;
-            scaler(buttonPressed!!);
+            pressButton(buttonPressed!!);
         }
 
         answer2Button.setText(questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
@@ -68,11 +66,11 @@ class Question1 : AppCompatActivity() {
 
             //unpress animation for old answer
             if (buttonPressed != null){
-                descaler(buttonPressed!!);
+                unpressButton(buttonPressed!!);
             }
             //press animation for new answer
             buttonPressed = answer2Button;
-            scaler(buttonPressed!!);
+            pressButton(buttonPressed!!);
         }
 
         answer3Button.setText(questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
@@ -81,11 +79,11 @@ class Question1 : AppCompatActivity() {
 
             //unpress animation for old answer
             if (buttonPressed != null){
-                descaler(buttonPressed!!);
+                unpressButton(buttonPressed!!);
             }
             //press animation for new answer
             buttonPressed = answer3Button;
-            scaler(buttonPressed!!);
+            pressButton(buttonPressed!!);
         }
 
         answer4Button.setText(questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
@@ -94,11 +92,11 @@ class Question1 : AppCompatActivity() {
 
             //unpress animation for old answer
             if (buttonPressed != null){
-                descaler(buttonPressed!!);
+                unpressButton(buttonPressed!!);
             }
             //press animation for new answer
             buttonPressed = answer4Button;
-            scaler(buttonPressed!!);
+            pressButton(buttonPressed!!);
         }
 
         title = "Question 1"
@@ -170,20 +168,24 @@ class Question1 : AppCompatActivity() {
 
     }
 
-    private fun scaler(button: Button){
+    private fun pressButton(button: Button){
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.9f);
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.9f);
         val animator = ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY);
 
         animator.disableViewDuringAnimation(button);
         animator.start();
+
+        button.setBackgroundColor(Color.GRAY);
     }
 
-    private fun descaler(button: Button){
+    private fun unpressButton(button: Button){
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f);
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f);
         val animator = ObjectAnimator.ofPropertyValuesHolder(button, scaleX, scaleY);
 
         animator.start();
+
+        button.setBackgroundColor(Color.WHITE);
     }
 }
