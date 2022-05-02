@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
 
-        title = "Quizdle"
+        title = ""
         var quiz = readQuizXml()
         if(quiz.date == ""){
             checkServer()
