@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.988"
         app:strokeColor="#F44336"
         app:strokeWidth="3dp"
-        android:contentDescription="Next button"/>
+        android:contentDescription="Button reading 'next'"/>
 
     <Button
         android:id="@+id/answer1"
