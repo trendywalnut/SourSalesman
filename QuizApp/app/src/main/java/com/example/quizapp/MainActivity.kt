@@ -3,7 +3,6 @@ package com.example.quizapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.util.Xml
 import android.view.View
@@ -25,7 +24,6 @@ import okhttp3.Response;
 import org.json.JSONArray
 import java.io.*
 import org.json.JSONObject
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,25 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
-        //load user data
-        val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
-        val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
-        var dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
-        var quizzesPlayed = quizzesTaken
 
         title = ""
-        var newQuiz = checkServer()
-        var quiz = readQuizXml()
-        if(newQuiz.number != -1){
-            if(quiz.number != newQuiz.number){
-                // new quiz!!
-                writeQuizXml(newQuiz)
-                quiz = newQuiz
-                dailyAnswered = false
-            }else{
-                // no new quiz
-            }
-        }
+
 
 
         val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
@@ -66,27 +48,53 @@ class MainActivity : AppCompatActivity() {
         val resultsButton:Button = findViewById(R.id.results)
 
 
-
+        //load user data
+        val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
+        val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
+        var dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
+        var quizzesPlayed = quizzesTaken
+        var dailyPlayed = dailyAnswered
 
         val quizzesPlayedText:TextView = findViewById(R.id.quizzesPlayedText)
         quizzesPlayedText.text = "Quizzes Played: " + quizzesPlayed
 
+        var newQuiz = checkServer()
+        var quiz = readQuizXml()
+        if(newQuiz.number != -1){
+            Log.d("quiz num","quiz num " + quiz.number)
+            Log.d("new quiz", "new quiz num " + newQuiz.number)
+            if(quiz.number != newQuiz.number){
+                // new quiz!!
 
-        //var dailyAnswered = false
-        if(correctArray != null && dailyAnswered){
+                //writeQuizXml(newQuiz)
+                //quiz = newQuiz
+            }else{
+                // no new quiz
+            }
+        }
+
+        val resetButton:Button = findViewById(R.id.resetButton)
+        resetButton.setOnClickListener{
+
+            dailyPlayed = false
+            checkServer()
+        }
+
+
+
+        if(correctArray != null && !dailyPlayed){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
                 startActivity(intent)
             }
-
-        }else if(dailyAnswered){
-            button.setOnClickListener{
-                Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
-            }
         }
-        else{
-            button.setOnClickListener{
+
+        button.setOnClickListener{
+            if(dailyPlayed){
+                Log.d("daily played", dailyPlayed.toString())
+                Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
+            }else{
                 val intent = Intent(this@MainActivity, Question1::class.java)
                 if(quizzesPlayed == -1){
                     quizzesPlayed = 0
@@ -134,20 +142,13 @@ class MainActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+
         }
 
 
-        val statButton:Button = findViewById(R.id.statsButton)
-        statButton.setOnClickListener{
 
 
-            quizzesTakenText.text = "Quizzes Taken: " + quizzesTaken
-            statsLayout.setVisibility(View.VISIBLE)
-        }
 
-        closeButton.setOnClickListener{
-            statsLayout.setVisibility(View.GONE)
-        }
     }
 
     fun checkServer(): Quiz{
@@ -191,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                             question.text = JSONQuestion.getString("text")
                             quiz.questions.add(question)
                         }
-                        //writeQuizXml(quiz)
+                        writeQuizXml(quiz)
                     })
                 }
             }
