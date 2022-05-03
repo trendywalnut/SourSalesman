@@ -83,6 +83,9 @@ class ResultsScreen : AppCompatActivity() {
             copyTexToClipboard(copyText)
         }
 
+        //accessibility
+        copyButton.contentDescription = copyText
+
     }
 
     private fun createCopyText(emojiArray: Array<String>?, checkEmojis :  Array<String>): String {
