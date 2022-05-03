@@ -73,9 +73,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val resetButton:Button = findViewById(R.id.resetButton)
+        resetButton.setOnClickListener{
+
+            dailyPlayed = false
+            Log.d("daily played", dailyPlayed.toString())
+        }
 
 
-        if(correctArray != null && !dailyPlayed){
+
+        if(correctArray != null){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
@@ -139,10 +146,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val resetButton:Button = findViewById(R.id.resetButton)
-        resetButton.setOnClickListener{
-            dailyPlayed = false
-        }
+
 
 
     }
