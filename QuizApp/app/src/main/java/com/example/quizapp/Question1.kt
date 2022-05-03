@@ -35,12 +35,16 @@ class Question1 : AppCompatActivity() {
 
         val questionNumberView: TextView = findViewById(R.id.question_number)
         questionNumberView.setText("Q" + (questionNumber + 1).toString())
+        questionNumberView.contentDescription = "Q" + (questionNumber + 1).toString()
 
         val questionSubject: TextView = findViewById(R.id.question_subject)
         questionSubject.setText(questionSubjects?.get(questionNumber).orEmpty())
+        questionSubject.contentDescription = questionSubjects?.get(questionNumber).orEmpty()
 
         val questionText: TextView = findViewById(R.id.question_text)
         questionText.setText(questionTexts?.get(questionNumber).orEmpty())
+        //accessibility
+        questionText.contentDescription = questionTexts?.get(questionNumber).orEmpty()
 
         val answer1Button: Button = findViewById(R.id.answer1)
         val answer2Button: Button = findViewById(R.id.answer2)
@@ -51,6 +55,9 @@ class Question1 : AppCompatActivity() {
         var buttonPressed: Button? = null;
 
         answer1Button.setText(questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
+        //set accessibility screen read text
+        answer1Button.contentDescription = questionAnswers?.get((questionNumber * 4) + 0).orEmpty()
+
         answer1Button.setOnClickListener {
             selectedAnswer = 0
 
@@ -64,6 +71,8 @@ class Question1 : AppCompatActivity() {
         }
 
         answer2Button.setText(questionAnswers?.get((questionNumber * 4) + 1).orEmpty())
+        answer2Button.contentDescription = questionAnswers?.get((questionNumber * 4) + 1).orEmpty()
+
         answer2Button.setOnClickListener {
             selectedAnswer = 1
 
@@ -77,6 +86,8 @@ class Question1 : AppCompatActivity() {
         }
 
         answer3Button.setText(questionAnswers?.get((questionNumber * 4) + 2).orEmpty())
+        answer3Button.contentDescription = questionAnswers?.get((questionNumber * 4) + 2).orEmpty()
+
         answer3Button.setOnClickListener {
             selectedAnswer = 2
 
@@ -90,6 +101,8 @@ class Question1 : AppCompatActivity() {
         }
 
         answer4Button.setText(questionAnswers?.get((questionNumber * 4) + 3).orEmpty())
+        answer4Button.contentDescription = questionAnswers?.get((questionNumber * 4) + 3).orEmpty()
+
         answer4Button.setOnClickListener {
             selectedAnswer = 3
 
