@@ -20,7 +20,8 @@
         app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="Question One of Five"/>
 
     <TextView
         android:id="@+id/question_subject"
@@ -35,19 +36,21 @@
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.181"
+        android:contentDescription="Label for question category, titled 'Art'"/>
 
     <TextView
         android:id="@+id/question_text"
         android:layout_width="364dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
+        android:contentDescription="Question text"
         android:fontFamily="@font/neufreit_extrabold"
         android:text="Who painted the Mona Lisa? "
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toTopOf="@+id/guideline0"
         app:layout_constraintVertical_bias="0.101" />
@@ -71,7 +74,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.988"
         app:strokeColor="#F44336"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+        android:contentDescription="Button reading 'next'"/>
 
     <Button
         android:id="@+id/answer1"

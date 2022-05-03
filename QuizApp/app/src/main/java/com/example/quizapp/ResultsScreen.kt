@@ -17,10 +17,13 @@ class ResultsScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
 
+
+
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
         val questionEmojis = thisIntent.getStringArrayExtra("questionEmojis")?.copyOf()
         val questionSubjects = thisIntent.getStringArrayExtra("questionSubjects")?.copyOf()
+
         println("copied arrays")
 
         title = "Results Screen"
@@ -36,6 +39,8 @@ class ResultsScreen : AppCompatActivity() {
         val copyButton = findViewById<Button>(R.id.copyButton)
         val checkEmojis : Array<String> = Array(5){wrongEmoji}
         println(checkEmojis)
+
+
 
 
         question1.text = questionSubjects!![0]
@@ -69,6 +74,7 @@ class ResultsScreen : AppCompatActivity() {
         val copyText : String = createCopyText(questionEmojis, checkEmojis)
 
         backButton.setOnClickListener{
+
             val i = Intent(this@ResultsScreen, MainActivity::class.java)
             startActivity(i)
         }
@@ -80,6 +86,7 @@ class ResultsScreen : AppCompatActivity() {
     }
 
     private fun createCopyText(emojiArray: Array<String>?, checkEmojis :  Array<String>): String {
+        //saveData()
         return emojiArray!![0] + checkEmojis[0] + emojiArray[1] + checkEmojis[1] + emojiArray[2] +
                 checkEmojis[2] + emojiArray[3] + checkEmojis[3] + emojiArray[4] + checkEmojis[4]
     }
@@ -91,5 +98,7 @@ class ResultsScreen : AppCompatActivity() {
 
         Toast.makeText(this, "Results Copied!", Toast.LENGTH_LONG).show()
     }
+
+
 
 }
