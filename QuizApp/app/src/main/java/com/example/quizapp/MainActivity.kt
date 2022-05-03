@@ -3,13 +3,11 @@ package com.example.quizapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import android.util.Xml
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizapp.data.Question
 import com.example.quizapp.data.Quiz
@@ -49,18 +47,43 @@ class MainActivity : AppCompatActivity() {
         val button:Button = findViewById(R.id.questionButton)
         val resultsButton:Button = findViewById(R.id.results)
 
-        var dailyAnswered = false
+
+        //load user data
+        val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
+        val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
+        val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
+        var quizzesPlayed = quizzesTaken
+
+
+        //var dailyAnswered = false
         if(correctArray != null && !dailyAnswered){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
                 startActivity(intent)
-                dailyAnswered = true
             }
 
-        }else{
+        }else if(dailyAnswered){
+            button.setOnClickListener{
+                Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else{
             button.setOnClickListener{
                 val intent = Intent(this@MainActivity, Question1::class.java)
+                if(quizzesPlayed == -1){
+                    quizzesPlayed = 0
+                }
+
+                quizzesPlayed += 1
+                //save user data
+                val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.apply{
+                    putInt("QUIZZES_TAKEN", quizzesPlayed)
+                    putBoolean("DAILY_ANSWERED", true)
+                }.apply()
+
 
                 quiz = readQuizXml()
 
@@ -89,6 +112,8 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("questionAnswers", questionAnswers.toTypedArray())
                 intent.putExtra("correctIndices", questionCorrectIndices.toIntArray())
                 intent.putExtra("correctArray", booleanArrayOf(false, false, false, false, false))
+                intent.putExtra("dailyAnswered", dailyAnswered)
+
 
                 startActivity(intent)
             }
@@ -97,9 +122,8 @@ class MainActivity : AppCompatActivity() {
 
         val statButton:Button = findViewById(R.id.statsButton)
         statButton.setOnClickListener{
-            //load user data
-            val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
-            val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", 0)
+
+
             quizzesTakenText.text = "Quizzes Taken: " + quizzesTaken
             statsLayout.setVisibility(View.VISIBLE)
         }

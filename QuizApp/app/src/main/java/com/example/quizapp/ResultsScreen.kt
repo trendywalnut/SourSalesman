@@ -17,11 +17,12 @@ class ResultsScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
 
+
+
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
         val questionEmojis = thisIntent.getStringArrayExtra("questionEmojis")?.copyOf()
         val questionSubjects = thisIntent.getStringArrayExtra("questionSubjects")?.copyOf()
-        val quizzesTaken = thisIntent.getIntExtra("quizzesTaken", 0)
 
         println("copied arrays")
 
@@ -38,6 +39,8 @@ class ResultsScreen : AppCompatActivity() {
         val copyButton = findViewById<Button>(R.id.copyButton)
         val checkEmojis : Array<String> = Array(5){wrongEmoji}
         println(checkEmojis)
+
+
 
 
         question1.text = questionSubjects!![0]
@@ -77,14 +80,6 @@ class ResultsScreen : AppCompatActivity() {
         }
 
         copyButton.setOnClickListener{
-            val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.apply{
-                putInt("QUIZZES_TAKEN", quizzesTaken)
-            }.apply()
-
-            Toast.makeText(applicationContext, "Data Saved!", Toast.LENGTH_SHORT).show()
-
             copyTexToClipboard(copyText)
         }
 
