@@ -188,4 +188,8 @@ class Question1 : AppCompatActivity() {
 
         button.setBackgroundColor(Color.WHITE);
     }
+
+    override fun onBackPressed() {
+        Toast.makeText(applicationContext, "No Backsies ;)", Toast.LENGTH_SHORT).show()
+    }
 }
