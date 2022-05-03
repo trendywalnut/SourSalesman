@@ -7,6 +7,9 @@ import android.os.Debug
 import android.util.Log
 import android.util.Xml
 import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.RelativeLayout
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizapp.data.Question
@@ -22,6 +25,7 @@ import okhttp3.Response;
 import org.json.JSONArray
 import java.io.*
 import org.json.JSONObject
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,10 +37,18 @@ class MainActivity : AppCompatActivity() {
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
 
         title = ""
+        var newQuiz = checkServer()
         var quiz = readQuizXml()
-        if(quiz.number == -1){
-            checkServer()
+        if(newQuiz.number != -1){
+            if(quiz.number != newQuiz.number){
+                // new quiz!!
+                writeQuizXml(newQuiz)
+                quiz = newQuiz
+            }else{
+                // no new quiz
+            }
         }
+
 
         val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
         val closeButton:ImageButton = findViewById(R.id.closeStatButton)
@@ -53,6 +65,9 @@ class MainActivity : AppCompatActivity() {
         val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
         val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
         var quizzesPlayed = quizzesTaken
+
+        val quizzesPlayedText:TextView = findViewById(R.id.quizzesPlayedText)
+        quizzesPlayedText.text = "Quizzes Played: " + quizzesPlayed
 
 
         //var dailyAnswered = false
@@ -133,8 +148,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun checkServer(): Quiz{
+        var quiz = Quiz()
 
-    fun checkServer(){
         val client = OkHttpClient()
 
         val request = Request.Builder()
@@ -159,7 +175,6 @@ class MainActivity : AppCompatActivity() {
                     //Log.d("final output", JSONString)
 
                     this@MainActivity.runOnUiThread(java.lang.Runnable {
-                        var quiz = Quiz()
                         val JSONQuestionArray: JSONArray = JSONObject(JSONString).getJSONArray("questions")
                         for(i in 0 until JSONQuestionArray.length()){
                             var question = Question()
@@ -174,11 +189,12 @@ class MainActivity : AppCompatActivity() {
                             question.text = JSONQuestion.getString("text")
                             quiz.questions.add(question)
                         }
-                        writeQuizXml(quiz)
+                        //writeQuizXml(quiz)
                     })
                 }
             }
         })
+        return quiz
     }
 
 
