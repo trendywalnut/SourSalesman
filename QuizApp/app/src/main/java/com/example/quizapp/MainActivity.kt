@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         //load user data
         val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
         val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
-        val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
+        var dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
         var quizzesPlayed = quizzesTaken
         var dailyPlayed = dailyAnswered
 
@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("new quiz", "new quiz num " + newQuiz.number)
             if(quiz.number != newQuiz.number){
                 // new quiz!!
-                //dailyAnswered = false
+                dailyPlayed = false
+                Log.d("daily played", dailyPlayed.toString())
                 writeQuizXml(newQuiz)
                 quiz = newQuiz
             }else{
@@ -77,25 +78,25 @@ class MainActivity : AppCompatActivity() {
         resetButton.setOnClickListener{
 
             dailyPlayed = false
-            Log.d("daily played", dailyPlayed.toString())
+            Log.d("button pressed", dailyPlayed.toString())
+
         }
 
 
 
-        if(correctArray != null){
+        if(correctArray != null && !dailyPlayed){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
                 startActivity(intent)
             }
-
-        }else if(dailyPlayed){
-            button.setOnClickListener{
-                Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
-            }
         }
-        else{
-            button.setOnClickListener{
+
+        button.setOnClickListener{
+            if(dailyPlayed){
+                Log.d("daily played", dailyPlayed.toString())
+                Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
+            }else{
                 val intent = Intent(this@MainActivity, Question1::class.java)
                 if(quizzesPlayed == -1){
                     quizzesPlayed = 0
@@ -143,6 +144,7 @@ class MainActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+
         }
 
 

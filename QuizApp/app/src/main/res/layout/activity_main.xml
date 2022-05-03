@@ -188,6 +188,7 @@
         android:id="@+id/quizzesPlayedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/neufreit_extrabold"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
