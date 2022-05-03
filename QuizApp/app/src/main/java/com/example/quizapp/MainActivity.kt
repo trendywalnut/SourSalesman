@@ -65,10 +65,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("new quiz", "new quiz num " + newQuiz.number)
             if(quiz.number != newQuiz.number){
                 // new quiz!!
-                dailyPlayed = false
-                Log.d("daily played", dailyPlayed.toString())
-                writeQuizXml(newQuiz)
-                quiz = newQuiz
+
+                //writeQuizXml(newQuiz)
+                //quiz = newQuiz
             }else{
                 // no new quiz
             }
@@ -78,8 +77,7 @@ class MainActivity : AppCompatActivity() {
         resetButton.setOnClickListener{
 
             dailyPlayed = false
-            Log.d("button pressed", dailyPlayed.toString())
-
+            checkServer()
         }
 
 
@@ -194,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                             question.text = JSONQuestion.getString("text")
                             quiz.questions.add(question)
                         }
-                        //writeQuizXml(quiz)
+                        writeQuizXml(quiz)
                     })
                 }
             }
