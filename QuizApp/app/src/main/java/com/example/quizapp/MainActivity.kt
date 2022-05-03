@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         //}
 
         val button:Button = findViewById(R.id.questionButton)
+        val resultsButton:Button = findViewById(R.id.results)
+
         var dailyAnswered = false
         if(correctArray != null){
             button.setOnClickListener {
