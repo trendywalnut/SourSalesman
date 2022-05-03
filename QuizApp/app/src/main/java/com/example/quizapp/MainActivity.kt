@@ -3,7 +3,6 @@ package com.example.quizapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.util.Xml
 import android.view.View
@@ -25,7 +24,6 @@ import okhttp3.Response;
 import org.json.JSONArray
 import java.io.*
 import org.json.JSONObject
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,17 +35,7 @@ class MainActivity : AppCompatActivity() {
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
 
         title = ""
-        var newQuiz = checkServer()
-        var quiz = readQuizXml()
-        if(newQuiz.number != -1){
-            if(quiz.number != newQuiz.number){
-                // new quiz!!
-                writeQuizXml(newQuiz)
-                quiz = newQuiz
-            }else{
-                // no new quiz
-            }
-        }
+
 
 
         val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
@@ -65,20 +53,36 @@ class MainActivity : AppCompatActivity() {
         val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
         val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
         var quizzesPlayed = quizzesTaken
+        var dailyPlayed = dailyAnswered
 
         val quizzesPlayedText:TextView = findViewById(R.id.quizzesPlayedText)
         quizzesPlayedText.text = "Quizzes Played: " + quizzesPlayed
 
+        var newQuiz = checkServer()
+        var quiz = readQuizXml()
+        if(newQuiz.number != -1){
+            Log.d("quiz num","quiz num " + quiz.number)
+            Log.d("new quiz", "new quiz num " + newQuiz.number)
+            if(quiz.number != newQuiz.number){
+                // new quiz!!
+                //dailyAnswered = false
+                writeQuizXml(newQuiz)
+                quiz = newQuiz
+            }else{
+                // no new quiz
+            }
+        }
 
-        //var dailyAnswered = false
-        if(correctArray != null && !dailyAnswered){
+
+
+        if(correctArray != null && !dailyPlayed){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
                 startActivity(intent)
             }
 
-        }else if(dailyAnswered){
+        }else if(dailyPlayed){
             button.setOnClickListener{
                 Toast.makeText(applicationContext, "You've Already Played Today!", Toast.LENGTH_SHORT).show()
             }
@@ -135,17 +139,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val statButton:Button = findViewById(R.id.statsButton)
-        statButton.setOnClickListener{
-
-
-            quizzesTakenText.text = "Quizzes Taken: " + quizzesTaken
-            statsLayout.setVisibility(View.VISIBLE)
+        val resetButton:Button = findViewById(R.id.resetButton)
+        resetButton.setOnClickListener{
+            dailyPlayed = false
         }
 
-        closeButton.setOnClickListener{
-            statsLayout.setVisibility(View.GONE)
-        }
+
     }
 
     fun checkServer(): Quiz{
