@@ -27,6 +27,7 @@ class ResultsScreen : AppCompatActivity() {
         println("copied arrays")
 
         title = "Results Screen"
+        val header = findViewById<TextView>(R.id.resultsTitle)
         val rightEmoji = "✔️"
         val wrongEmoji = "❌ "
         val question1 = findViewById<TextView>(R.id.question1)
@@ -84,7 +85,8 @@ class ResultsScreen : AppCompatActivity() {
         }
 
         //accessibility
-        copyButton.contentDescription = copyText
+        header.contentDescription = "Today's results: " + copyText
+        copyButton.contentDescription = "Copy results: " + copyText
 
     }
 
