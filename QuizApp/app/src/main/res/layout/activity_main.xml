@@ -10,16 +10,17 @@
         android:id="@+id/statsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="284dp"
         android:backgroundTint="#FF8282"
         android:fontFamily="@font/neufreit_extrabold"
         android:text="stats"
         android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.119" />
 
     <RelativeLayout
         android:id="@+id/statsLayout"
@@ -122,29 +123,28 @@
         android:id="@+id/imageView"
         android:layout_width="310dp"
         android:layout_height="106dp"
-        app:layout_constraintBottom_toBottomOf="@+id/welcome"
+        app:layout_constraintBottom_toTopOf="@+id/welcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759"
+        app:layout_constraintTop_toBottomOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_2" />
 
     <Button
         android:id="@+id/questionButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#FF8282"
         android:fontFamily="@font/neufreit_extrabold"
         android:text="Answer today's questions"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
     <Button
         android:id="@+id/results"
@@ -158,19 +158,27 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionButton"
-        app:layout_constraintVertical_bias="0.91" />
+        app:layout_constraintVertical_bias="0.107" />
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_width="339dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/neufreit_extrabold"
         android:text="Welcome Back!"
         android:textSize="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/questionButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
     />
 
