@@ -20,7 +20,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.119"
+        android:contentDescription="Button that reads 'Stats.'"/>
 
     <RelativeLayout
         android:id="@+id/statsLayout"
@@ -129,7 +130,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline11"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_2" />
+        app:srcCompat="@drawable/logo_2"
+        android:contentDescription="Logo with big bold red text reading, 'Quizzle' with a question mark for the i. "/>
 
     <Button
         android:id="@+id/questionButton"
@@ -140,11 +142,11 @@
         android:fontFamily="@font/neufreit_extrabold"
         android:text="Answer today's questions"
         android:textSize="24dp"
-
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome"
+        android:contentDescription="Button that reads 'Answer today's questions.'"/>
 
     <Button
         android:id="@+id/results"
@@ -158,7 +160,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionButton"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintVertical_bias="0.107"
+        android:contentDescription="Button that reads 'Today's results.'"/>
 
     <TextView
         android:id="@+id/welcome"
@@ -171,7 +174,8 @@
         app:layout_constraintBottom_toTopOf="@+id/questionButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:contentDescription="Text saying 'Welcome back!'"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"

@@ -97,7 +97,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline4"
         app:layout_constraintVertical_bias="0.466"
         app:strokeColor="#F44336"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+        android:contentDescription="Answer 1: "/>
 
     <Button
         android:id="@+id/answer2"
@@ -124,7 +125,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline5"
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="#F44336"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+        android:contentDescription="Answer 2: "/>
 
     <Button
         android:id="@+id/answer3"
@@ -150,7 +152,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline6"
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="#F44336"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+        android:contentDescription="Answer 3: "/>
 
     <Button
         android:id="@+id/answer4"
@@ -176,7 +179,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline7"
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="#F44336"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+        android:contentDescription="Answer 4: "/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline0"
