@@ -50,11 +50,12 @@ class MainActivity : AppCompatActivity() {
         val resultsButton:Button = findViewById(R.id.results)
 
         var dailyAnswered = false
-        if(correctArray != null){
+        if(correctArray != null && !dailyAnswered){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
                 startActivity(intent)
+                dailyAnswered = true
             }
 
         }else{
