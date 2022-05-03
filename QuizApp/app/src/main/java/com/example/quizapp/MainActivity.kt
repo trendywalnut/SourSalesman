@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         title = ""
         var quiz = readQuizXml()
-        if(quiz.date == ""){
+        if(quiz.number == -1){
             checkServer()
         }
 
@@ -165,6 +165,10 @@ class MainActivity : AppCompatActivity() {
             xmlSerializer.startDocument("UTF-8", true)
             xmlSerializer.startTag(null, "quizData")
 
+            xmlSerializer.startTag(null, "number")
+            xmlSerializer.text(quiz.number.toString())
+            xmlSerializer.endTag(null, "number")
+
             xmlSerializer.startTag(null, "date")
             xmlSerializer.text(quiz.date)
             xmlSerializer.endTag(null, "date")
@@ -281,6 +285,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else if (eventType == XmlPullParser.TEXT) {
                 when(startTags[startTags.lastIndex]){
+                    "number" -> quiz.number = xpp!!.text.toString().toInt()
                     "date" -> quiz.date = xpp!!.text.toString()
                     "text" -> quiz.questions[quiz.questions.lastIndex].text = xpp!!.text.toString()
                     "subject" -> quiz.questions[quiz.questions.lastIndex].subject = xpp!!.text.toString()
