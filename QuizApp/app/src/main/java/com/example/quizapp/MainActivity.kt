@@ -34,10 +34,18 @@ class MainActivity : AppCompatActivity() {
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
 
         title = ""
+        var newQuiz = checkServer()
         var quiz = readQuizXml()
-        if(quiz.number == -1){
-            checkServer()
+        if(newQuiz.number != -1){
+            if(quiz.number != newQuiz.number){
+                // new quiz!!
+                writeQuizXml(newQuiz)
+                quiz = newQuiz
+            }else{
+                // no new quiz
+            }
         }
+
 
         val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
         val closeButton:ImageButton = findViewById(R.id.closeStatButton)
@@ -108,7 +116,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun checkServer(){
+    fun checkServer(): Quiz{
+        var quiz = Quiz()
+
         val client = OkHttpClient()
 
         val request = Request.Builder()
@@ -133,7 +143,6 @@ class MainActivity : AppCompatActivity() {
                     //Log.d("final output", JSONString)
 
                     this@MainActivity.runOnUiThread(java.lang.Runnable {
-                        var quiz = Quiz()
                         val JSONQuestionArray: JSONArray = JSONObject(JSONString).getJSONArray("questions")
                         for(i in 0 until JSONQuestionArray.length()){
                             var question = Question()
@@ -148,11 +157,12 @@ class MainActivity : AppCompatActivity() {
                             question.text = JSONQuestion.getString("text")
                             quiz.questions.add(question)
                         }
-                        writeQuizXml(quiz)
+                        //writeQuizXml(quiz)
                     })
                 }
             }
         })
+        return quiz
     }
 
 
