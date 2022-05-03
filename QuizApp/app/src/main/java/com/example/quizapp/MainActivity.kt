@@ -148,14 +148,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-<<<<<<< HEAD
     fun checkServer(): Quiz{
         var quiz = Quiz()
 
-=======
-
-    fun checkServer(){
->>>>>>> f14320eb3f6d0ad857edcbb6b04a42784c15c444
         val client = OkHttpClient()
 
         val request = Request.Builder()
