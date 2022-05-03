@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -29,6 +30,8 @@ class Question1 : AppCompatActivity() {
         val questionAnswers = thisIntent.getStringArrayExtra("questionAnswers")
         val correctIndices = thisIntent.getIntArrayExtra("correctIndices")
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
+
+        var quizzesTaken = 0
 
         val questionNumberView: TextView = findViewById(R.id.question_number)
         questionNumberView.setText("Q" + (questionNumber + 1).toString())
@@ -123,10 +126,13 @@ class Question1 : AppCompatActivity() {
                     Log.d("correct: ", correctArray?.get(i).toString())
                 }
                 if (questionNumber == 4) {
+                    quizzesTaken += 1
                     val i = Intent(this@Question1, ResultsScreen::class.java)
                     i.putExtra("correctArray", correctArray)
                     i.putExtra("questionEmojis", questionEmojis)
                     i.putExtra("questionSubjects", questionSubjects)
+                    i.putExtra("quizzesTaken", quizzesTaken)
+
                     startActivity(i)
                 } else {
                     val i = Intent(this@Question1, Question1::class.java)
@@ -192,4 +198,6 @@ class Question1 : AppCompatActivity() {
     override fun onBackPressed() {
         Toast.makeText(applicationContext, "No Backsies ;)", Toast.LENGTH_SHORT).show()
     }
+
+
 }

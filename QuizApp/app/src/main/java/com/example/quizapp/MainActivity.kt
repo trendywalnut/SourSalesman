@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizapp.data.Question
 import com.example.quizapp.data.Quiz
@@ -41,14 +42,9 @@ class MainActivity : AppCompatActivity() {
 
         val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
         val closeButton:ImageButton = findViewById(R.id.closeStatButton)
-        //val statsLayout:RelativeLayout = findViewById(R.id.statsLayout)
+        val quizzesTakenText:TextView = findViewById(R.id.quizzesTaken)
         statsLayout.setVisibility(View.GONE)
 
-        //figure this out
-        //@Override
-        //public void onBackPressed() {
-            // Do Here what ever you want do on back press;
-        //}
 
         val button:Button = findViewById(R.id.questionButton)
         val resultsButton:Button = findViewById(R.id.results)
@@ -100,6 +96,10 @@ class MainActivity : AppCompatActivity() {
 
         val statButton:Button = findViewById(R.id.statsButton)
         statButton.setOnClickListener{
+            //load user data
+            val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
+            val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", 0)
+            quizzesTakenText.text = "Quizzes Taken: " + quizzesTaken
             statsLayout.setVisibility(View.VISIBLE)
         }
 
@@ -107,6 +107,7 @@ class MainActivity : AppCompatActivity() {
             statsLayout.setVisibility(View.GONE)
         }
     }
+
 
     fun checkServer(){
         val client = OkHttpClient()
