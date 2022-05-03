@@ -35,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         val thisIntent = intent
         val correctArray = thisIntent.getBooleanArrayExtra("correctArray")?.copyOf()
+        //load user data
+        val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
+        val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
+        var dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
+        var quizzesPlayed = quizzesTaken
 
         title = ""
         var newQuiz = checkServer()
@@ -44,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 // new quiz!!
                 writeQuizXml(newQuiz)
                 quiz = newQuiz
+                dailyAnswered = false
             }else{
                 // no new quiz
             }
@@ -60,18 +66,14 @@ class MainActivity : AppCompatActivity() {
         val resultsButton:Button = findViewById(R.id.results)
 
 
-        //load user data
-        val sharedPreferences = getSharedPreferences("userStats", Context.MODE_PRIVATE)
-        val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
-        val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
-        var quizzesPlayed = quizzesTaken
+
 
         val quizzesPlayedText:TextView = findViewById(R.id.quizzesPlayedText)
         quizzesPlayedText.text = "Quizzes Played: " + quizzesPlayed
 
 
         //var dailyAnswered = false
-        if(correctArray != null && !dailyAnswered){
+        if(correctArray != null && dailyAnswered){
             button.setOnClickListener {
                 val intent = Intent(this@MainActivity, ResultsScreen::class.java)
                 intent.putExtra("correctArray", correctArray)
