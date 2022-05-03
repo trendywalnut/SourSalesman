@@ -22,6 +22,7 @@ import okhttp3.Response;
 import org.json.JSONArray
 import java.io.*
 import org.json.JSONObject
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         val quizzesTaken = sharedPreferences.getInt("QUIZZES_TAKEN", -1)
         val dailyAnswered = sharedPreferences.getBoolean("DAILY_ANSWERED", false)
         var quizzesPlayed = quizzesTaken
+
+        val quizzesPlayedText:TextView = findViewById(R.id.quizzesPlayedText)
+        quizzesPlayedText.text = "Quizzes Played: " + quizzesPlayed
 
 
         //var dailyAnswered = false
