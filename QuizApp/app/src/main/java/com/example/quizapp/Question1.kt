@@ -54,10 +54,12 @@ class Question1 : AppCompatActivity() {
         //value for performing animations on buttons
         var buttonPressed: Button? = null;
 
+        //set onscreen text
         answer1Button.setText(questionAnswers?.get((questionNumber * 4) + 0).orEmpty())
         //set accessibility screen read text
         answer1Button.contentDescription = questionAnswers?.get((questionNumber * 4) + 0).orEmpty()
 
+        //these onClickListeners for the buttons determine what to do when an answer is selected
         answer1Button.setOnClickListener {
             selectedAnswer = 0
 
